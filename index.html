@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jash | Embedded Systems Developer</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="images/favicon.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header class="navbar">
+  <h1 class="logo">Jash<span>.</span></h1>
+
+  <nav class="nav-links" id="navLinks">
+    <a href="#hero">Home</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</header>
+
+<section class="hero" id="hero">
+  <div>
+    <h1>Hi, I'm <span>Jash.</span></h1>
+    <h2>Embedded Systems Developer | Arduino | ESP32 | IoT</h2>
+    <p>
+      I build smart robotics and IoT automation systems using Arduino and ESP32.
+      I love building real-world tech that actually does something.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#projects" class="btn primary">View Projects</a>
+      <a href="#contact" class="btn secondary">Contact Me</a>
+    </div>
+  </div>
+
+  <div class="hero-card">
+    <h3>Tech Stack</h3>
+    <ul>
+      <li>Arduino / ESP32 / ESP8266</li>
+      <li>WiFi + Bluetooth</li>
+      <li>Robotics</li>
+      <li>Displays</li>
+      <li>Sensors + Automation</li>
+    </ul>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-title">
+    <h2>About Me</h2>
+    <p>Who I am and what I build</p>
+  </div>
+
+  <div class="glass">
+    I'm <b>Jash</b>, an Embedded Systems Developer focused on <b>Arduino, ESP32, IoT, and Robotics</b>.
+    I design real-world automation systems using sensors, motors, relays, and communication modules.
+    My projects include <b>WiFi-controlled robots, RFID automation, smart home systems, and ESP32-CAM security projects</b>.
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-title">
+    <h2>Skills</h2>
+  </div>
+
+  <div class="grid">
+    <div class="card">Arduino</div>
+    <div class="card">ESP32</div>
+    <div class="card">ESP8266</div>
+    <div class="card">IoT</div>
+    <div class="card">Robotics</div>
+    <div class="card">C/C++</div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-title">
+    <h2>Projects</h2>
+  </div>
+
+  <div class="projects">
+
+    <div class="project">
+      <img src="images/rfid.jpg">
+      <h3>RFID Attendance System</h3>
+      <p>Uploads logs to Google Sheets.</p>
+      <a href="https://github.com/JashGardharia/RFID-Smart-Attendance-System" class="btn primary">GitHub</a>
+    </div>
+
+    <div class="project">
+      <img src="images/spray.jpg">
+      <h3>Sanitizing System</h3>
+      <p>Auto spray system.</p>
+      <a href="https://github.com/JashGardharia/Automatic-Hand-Sanitizing-Smart-Door" class="btn primary">GitHub</a>
+    </div>
+
+    <div class="project">
+      <img src="images/esp32cam.jpg">
+      <h3>ESP32-CAM Security</h3>
+      <p>Live streaming camera.</p>
+      <a href="https://github.com/JashGardharia/ESP32-CAM-Smart-Security-Camera" class="btn primary">GitHub</a>
+    </div>
+
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-title">
+    <h2>Contact Me</h2>
+  </div>
+
+  <div class="contact">
+    <input id="name" placeholder="Name">
+    <input id="email" placeholder="Email">
+    <textarea id="msg" placeholder="Message"></textarea>
+
+    <button onclick="sendMail()" class="btn primary">Send</button>
+  </div>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
