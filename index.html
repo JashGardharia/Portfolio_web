@@ -3,259 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jash | Embedded Systems Developer</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <title>Jash | Embedded Systems & AI</title>
     <link rel="stylesheet" href="style.css">
-    
-    <link rel="icon" type="image/png" href="images/favicon.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
-
-    <div id="loader">
-        <div class="loader-content">
-            <h2 class="loader-text">Jash</h2>
-            <div class="animated-dot"></div>
-        </div>
-        <div class="progress-bar-container">
-            <div class="progress-bar" id="progress-bar"></div>
-        </div>
-    </div>
 
     <canvas id="bg-canvas"></canvas>
 
     <nav id="navbar">
-        <div class="nav-container">
-            <div class="logo">Jash.</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
+        <div class="logo">Jash.Dev</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger">☰</div>
     </nav>
 
-    <section id="home" class="hero reveal">
-        <div class="hero-content">
-            <h1>Hi, I'm Jash.</h1>
-            <h2>Embedded Systems Developer | Arduino | ESP32 | IoT</h2>
-            <p>I build smart robotics and IoT automation systems using Arduino and ESP32.<br>
-            I love building real-world tech that actually does something.</p>
-            
-            <div class="hero-buttons">
-                <a href="#projects" class="btn btn-primary">View Projects</a>
-                <a href="#contact" class="btn btn-secondary">Contact Me</a>
+    <main id="main-content">
+        <section id="home" class="dynamic-3d">
+            <div class="content-box">
+                <h1>Building the Future with<br><span>Embedded Systems & AI</span></h1>
+                <p>Bridging the gap between hardware and intelligent software to create automated, real-world solutions.</p>
+                <a href="#projects" class="btn glow-btn">See My Work</a>
             </div>
-        </div>
+        </section>
 
-        <div class="hero-card tilt-card glass">
-            <h3>Tech Stack</h3>
-            <ul>
-                <li>⚡ Arduino / ESP32 / ESP8266</li>
-                <li>📡 WiFi Web Server + Bluetooth</li>
-                <li>🤖 Robotics + Motor Drivers</li>
-                <li>🖥 OLED / LCD Interfaces</li>
-                <li>📌 Sensors + Automation Systems</li>
-            </ul>
-        </div>
-    </section>
-
-    <section id="about" class="about reveal">
-        <div class="section-header">
-            <h2>About Me</h2>
-            <p class="subtext">Who I am and what I build</p>
-        </div>
-        <div class="about-content glass tilt-card">
-            <p>I'm Jash, an Embedded Systems Developer focused on Arduino, ESP32, IoT, and Robotics.<br>
-            I design real-world automation systems using sensors, motors, relays, and communication modules.<br>
-            My projects include WiFi-controlled robots, RFID automation, smart home systems, and ESP32-CAM security projects.<br>
-            I also build clean web dashboards for IoT control.</p>
-        </div>
-    </section>
-
-    <section id="skills" class="skills reveal">
-        <div class="section-header">
-            <h2>Skills</h2>
-            <p class="subtext">Technologies I use for robotics & IoT systems</p>
-        </div>
-        <div class="skills-grid">
-            <div class="skill-tag glass tilt-card">Arduino</div>
-            <div class="skill-tag glass tilt-card">ESP32</div>
-            <div class="skill-tag glass tilt-card">ESP8266</div>
-            <div class="skill-tag glass tilt-card">IoT Development</div>
-            <div class="skill-tag glass tilt-card">Robotics</div>
-            <div class="skill-tag glass tilt-card">C / C++</div>
-            <div class="skill-tag glass tilt-card">Sensors</div>
-            <div class="skill-tag glass tilt-card">Motor Drivers</div>
-            <div class="skill-tag glass tilt-card">OLED / LCD</div>
-            <div class="skill-tag glass tilt-card">Bluetooth HC-05</div>
-            <div class="skill-tag glass tilt-card">WiFi Web Server</div>
-        </div>
-    </section>
-
-    <section id="projects" class="projects reveal">
-        <div class="section-header">
-            <h2>Projects</h2>
-            <p class="subtext">My best robotics & IoT builds</p>
-        </div>
-        
-        <div class="projects-grid">
-            <div class="project-card glass tilt-card">
-                <div class="project-img"><img src="images/rfid.jpg" alt="RFID Attendance System"></div>
-                <div class="project-info">
-                    <h3>1. RFID Attendance System 📋</h3>
-                    <p>Automated attendance system that uploads logs to Google Sheets in real-time.</p>
-                    <p class="tech-stack"><strong>Tech:</strong> Arduino | RFID | Google Sheets | WiFi</p>
-                    <a href="#" class="project-link">GitHub</a>
-                </div>
+        <section id="about" class="dynamic-3d">
+            <div class="content-box card-3d">
+                <h2>About Me</h2>
+                <h3 class="role">Name: Jash | Role: Embedded Systems & AI Enthusiast</h3>
+                <p>I am a passionate student specializing in Arduino, ESP32, IoT systems, and automation. I build practical, real-world solutions using hardware and software integration. My core interests lie in robotics, smart systems, and innovation-driven engineering.</p>
             </div>
+        </section>
 
-            <div class="project-card glass tilt-card">
-                <div class="project-img"><img src="images/maruader.jpg" alt="ESP32 WiFi Marauder"></div>
-                <div class="project-info">
-                    <h3>2. ESP32 WiFi Marauder 🩻</h3>
-                    <p>A WiFi Maruader that can Hack, Stop and Spam any WiFi of your choice.</p>
-                    <p class="tech-stack"><strong>Tech:</strong> ESP32 | WiFi | OLED | Buttons</p>
-                </div>
+        <section id="skills" class="dynamic-3d">
+            <div class="section-header">
+                <h2>🧠 Technical Skills</h2>
             </div>
-
-            <div class="project-card glass tilt-card">
-                <div class="project-img"><img src="images/spray.jpg" alt="Door Handle Sanitizing System"></div>
-                <div class="project-info">
-                    <h3>3. Door Handle Sanitizing System 🦠</h3>
-                    <p>Automated System that sanitizes the door handle once opened.</p>
-                    <p class="tech-stack"><strong>Tech:</strong> Arduino | IR | Servo | Spray</p>
-                </div>
+            <div class="skills-grid">
+                <div class="skill-card card-3d"><h3>Arduino Development</h3></div>
+                <div class="skill-card card-3d"><h3>ESP32 & IoT Systems</h3></div>
+                <div class="skill-card card-3d"><h3>Embedded C / C++</h3></div>
+                <div class="skill-card card-3d"><h3>Sensor Integration</h3></div>
+                <div class="skill-card card-3d"><h3>Automation Systems</h3></div>
+                <div class="skill-card card-3d"><h3>Basic AI Integration</h3></div>
+                <div class="skill-card card-3d"><h3>Circuit Design</h3></div>
+                <div class="skill-card card-3d"><h3>Debugging Hardware</h3></div>
             </div>
+        </section>
 
-            <div class="project-card glass tilt-card">
-                <div class="project-img"><img src="images/esp32cam.jpg" alt="ESP32-CAM Security Camera"></div>
-                <div class="project-info">
-                    <h3>4. ESP32-CAM Security Camera 📸</h3>
-                    <p>WiFi live streaming security camera project with motion alert concept.</p>
-                </div>
+        <section id="projects" class="dynamic-3d">
+            <div class="section-header">
+                <h2>🚀 Featured Projects</h2>
             </div>
-
-            <div class="project-card glass tilt-card">
-                <div class="project-img"><img src="images/seedrobot.jpg" alt="ESP32 Seed Sowing Robot"></div>
-                <div class="project-info">
-                    <h3>5. ESP32 Seed Sowing Robot 🌱</h3>
-                </div>
-            </div>
-
-            <div class="project-card glass tilt-card">
-                <div class="project-img"><img src="images/trashcan.jpg" alt="Smart Waste Degeneration Trashcan"></div>
-                <div class="project-info">
-                    <h3>6. Smart Waste Degeneration Trashcan 🗑️</h3>
-                </div>
-            </div>
-
-            <div class="project-card glass tilt-card">
-                <div class="project-img"><img src="images/booktransport.jpg" alt="Book Transport Buggy"></div>
-                <div class="project-info">
-                    <h3>7. Book Transport Buggy 📚</h3>
-                </div>
-            </div>
-
-            <div class="project-card glass tilt-card">
-                <div class="project-img"><img src="images/smarthome.jpg" alt="Smart Home Automation"></div>
-                <div class="project-info">
-                    <h3>8. Smart Home Automation 🏠</h3>
-                </div>
-            </div>
-
-            <div class="project-card glass tilt-card">
-                <div class="project-img"><img src="images/bluetoothcar.jpg" alt="Bluetooth Robot Car"></div>
-                <div class="project-info">
-                    <h3>9. Bluetooth Robot Car 📡</h3>
-                </div>
-            </div>
-
-            <div class="project-card glass tilt-card">
-                <div class="project-img"><img src="images/plantwater.jpg" alt="Smart Plant Watering System"></div>
-                <div class="project-info">
-                    <h3>10. Smart Plant Watering System 🌵</h3>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="contact reveal">
-        <div class="section-header">
-            <h2>Contact Me</h2>
-            <p class="subtext">Let's build something awesome 🚀</p>
-        </div>
-
-        <div class="contact-container">
-            <div class="contact-form glass tilt-card">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" placeholder="Your Name">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="Your Email">
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" rows="5" placeholder="Your Message"></textarea>
-                </div>
-                <div class="form-actions">
-                    <button class="btn btn-primary" onclick="sendEmail()">Send Email</button>
-                    <button class="btn btn-secondary" onclick="copyMessage()">Copy Text</button>
-                </div>
-            </div>
-
-            <div class="contact-info">
-                <div class="glass info-card">
-                    <h3>Connect with me</h3>
-                    <p><i class="fas fa-envelope"></i> jashembedded@gmail.com</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-github"></i> GitHub</a>
-                        <a href="#">Fiverr</a>
-                        <a href="#"><i class="fas fa-envelope"></i> Email</a>
-                        <a href="#"><i class="fab fa-discord"></i> Discord</a>
+            <div class="projects-grid">
+                <div class="project-card card-3d">
+                    <div class="card-content">
+                        <h3>RFID Smart Attendance System</h3>
+                        <p>An advanced attendance tracker logging data seamlessly to the cloud.</p>
+                        <div class="tech-stack">
+                            <span>ESP32</span> <span>Telegram API</span> <span>Google Sheets</span> <span>Image Verification</span>
+                        </div>
+                        <p class="features">Includes automation and surveillance features.</p>
+                        <a href="#" class="btn outline-btn">View Project</a>
                     </div>
-                    <button class="btn btn-primary cert-btn" onclick="openModal()">My Certificates</button>
+                </div>
+
+                <div class="project-card card-3d">
+                    <div class="card-content">
+                        <h3>Auto Hand Sanitizer & Smart Door</h3>
+                        <p>A touchless entry and sanitization system focused on hygiene automation.</p>
+                        <div class="tech-stack">
+                            <span>Arduino</span> <span>IR/Ultrasonic Sensors</span> <span>Motor Drivers</span>
+                        </div>
+                        <a href="#" class="btn outline-btn">View Project</a>
+                    </div>
+                </div>
+
+                <div class="project-card card-3d">
+                    <div class="card-content">
+                        <h3>Smart Water Management System</h3>
+                        <p>Monitors and controls water usage autonomously to prevent wastage.</p>
+                        <div class="tech-stack">
+                            <span>IoT</span> <span>Flow Sensors</span> <span>Automation Logic</span>
+                        </div>
+                        <a href="#" class="btn outline-btn">View Project</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <div id="certModal" class="modal glass">
-        <span class="close-modal" onclick="closeModal()">&times;</span>
-        <div class="modal-content">
-            <div class="slider-container">
-                <div class="slide active"><img src="images/cert1.jpg" alt="Certificate 1"></div>
-                <div class="slide"><img src="images/cert2.jpg" alt="Certificate 2"></div>
-                <div class="slide"><img src="images/cert3.jpg" alt="Certificate 3"></div>
-                <div class="slide"><img src="images/cert4.jpg" alt="Certificate 4"></div>
-                <div class="slide"><img src="images/cert5.jpg" alt="Certificate 5"></div>
+        <section id="contact" class="dynamic-3d">
+            <div class="content-box card-3d">
+                <h2>📬 Let's Connect</h2>
+                <div class="contact-info">
+                    <p>Email: <span>jash.embedded@example.com</span></p>
+                    <a href="https://github.com" target="_blank" class="btn outline-btn">GitHub Profile</a>
+                </div>
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" rows="4" required></textarea>
+                    <button type="submit" class="btn glow-btn">Send Message</button>
+                </form>
             </div>
-            <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
-            <a class="next" onclick="changeSlide(1)">&#10095;</a>
-        </div>
-    </div>
-
-    <footer>
-        <p>© 2026 Jash. All Rights Reserved.</p>
-    </footer>
-
-    <button id="back-to-top" onclick="scrollToTop()">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+        </section>
+    </main>
 
     <script src="script.js"></script>
 </body>
