@@ -1,221 +1,170 @@
-// 1. Loader Animation
-window.addEventListener('load', () => {
-    let progress = 0;
-    const progressBar = document.getElementById('progress-bar');
-    const loader = document.getElementById('loader');
+// --- 1. Three.js Background Setup (The Rotating Arduino) ---
+const canvas = document.querySelector('#bg-canvas');
+const scene = new THREE.Scene();
+
+// Camera setup
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.z = 25;
+
+// Renderer setup
+const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
+
+// Lighting
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+scene.add(ambientLight);
+const pointLight = new THREE.PointLight(0x00d2ff, 1);
+pointLight.position.set(10, 10, 10);
+scene.add(pointLight);
+
+// --- Build a Stylized "Arduino" using Primitives ---
+const arduinoGroup = new THREE.Group();
+
+// Main Board (Blue PCB)
+const boardGeo = new THREE.BoxGeometry(10, 0.5, 14);
+const boardMat = new THREE.MeshStandardMaterial({ color: 0x005A9C, roughness: 0.7 });
+const board = new THREE.Mesh(boardGeo, boardMat);
+arduinoGroup.add(board);
+
+// Main Microcontroller (Black Chip)
+const chipGeo = new THREE.BoxGeometry(2, 0.6, 6);
+const chipMat = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.4 });
+const chip = new THREE.Mesh(chipGeo, chipMat);
+chip.position.set(1, 0.3, 0);
+arduinoGroup.add(chip);
+
+// USB Port (Silver)
+const usbGeo = new THREE.BoxGeometry(2, 1.5, 2.5);
+const usbMat = new THREE.MeshStandardMaterial({ color: 0xcccccc, metalness: 0.8 });
+const usb = new THREE.Mesh(usbGeo, usbMat);
+usb.position.set(-3, 0.75, -5.5);
+arduinoGroup.add(usb);
+
+// Power Jack (Black)
+const powerGeo = new THREE.BoxGeometry(1.5, 1.2, 2);
+const power = new THREE.Mesh(powerGeo, chipMat);
+power.position.set(-3, 0.6, 5);
+arduinoGroup.add(power);
+
+// IO Header Pins (Black strips)
+const headerGeo = new THREE.BoxGeometry(0.8, 0.8, 10);
+const headerGeo2 = new THREE.BoxGeometry(0.8, 0.8, 8);
+const header1 = new THREE.Mesh(headerGeo, chipMat);
+header1.position.set(4, 0.4, 0);
+const header2 = new THREE.Mesh(headerGeo2, chipMat);
+header2.position.set(-4, 0.4, -1);
+arduinoGroup.add(header1);
+arduinoGroup.add(header2);
+
+// Add board to scene and tilt it initially
+scene.add(arduinoGroup);
+arduinoGroup.rotation.x = Math.PI / 4;
+arduinoGroup.rotation.y = Math.PI / 4;
+
+// Animation loop
+function animate() {
+    requestAnimationFrame(animate);
     
-    const interval = setInterval(() => {
-        progress += Math.floor(Math.random() * 20) + 10;
-        if(progress >= 100) {
-            progress = 100;
-            clearInterval(interval);
-            setTimeout(() => {
-                loader.style.opacity = '0';
-                setTimeout(() => loader.style.display = 'none', 500);
-            }, 300);
-        }
-        progressBar.style.width = `${progress}%`;
-    }, 100);
-});
+    // Base slow rotation for idle visual effect
+    arduinoGroup.rotation.y += 0.002;
+    arduinoGroup.rotation.x += 0.001;
 
-// 2. Hamburger Toggle
-const hamburger = document.querySelector(".hamburger");
-const navLinks = document.querySelector(".nav-links");
-const links = document.querySelectorAll(".nav-links li");
-
-hamburger.addEventListener("click", () => {
-    hamburger.classList.toggle("active");
-    navLinks.classList.toggle("active");
-});
-
-links.forEach(link => {
-    link.addEventListener("click", () => {
-        hamburger.classList.remove("active");
-        navLinks.classList.remove("active");
-    });
-});
-
-// Navbar Blur on Scroll
-window.addEventListener('scroll', () => {
-    const nav = document.getElementById('navbar');
-    if (window.scrollY > 50) {
-        nav.classList.add('scrolled');
-    } else {
-        nav.classList.remove('scrolled');
-    }
-});
-
-// 3. Scroll Reveal Animation
-const revealElements = document.querySelectorAll('.reveal');
-
-const revealOnScroll = () => {
-    const windowHeight = window.innerHeight;
-    const elementVisible = 100;
-
-    revealElements.forEach((el) => {
-        const elementTop = el.getBoundingClientRect().top;
-        if (elementTop < windowHeight - elementVisible) {
-            el.classList.add('active');
-        }
-    });
-};
-window.addEventListener('scroll', revealOnScroll);
-revealOnScroll(); // Trigger on load
-
-// 4. Back to Top Button
-const backToTopBtn = document.getElementById("back-to-top");
-
-window.addEventListener("scroll", () => {
-    if (window.scrollY > 300) {
-        backToTopBtn.style.display = "block";
-    } else {
-        backToTopBtn.style.display = "none";
-    }
-});
-
-function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    renderer.render(scene, camera);
 }
+animate();
 
-// 5 & 6. Contact Form Logic (Mailto & Copy)
-function getFormData() {
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
-    return `Hi, my name is ${name}.%0A%0AMy Email: ${email}%0A%0A${message}`;
-}
-
-function sendEmail() {
-    const body = getFormData();
-    window.location.href = `mailto:jashembedded@gmail.com?subject=Portfolio Contact&body=${body}`;
-}
-
-function copyMessage() {
-    const rawText = `Hi, my name is ${document.getElementById('name').value}.\n\nMy Email: ${document.getElementById('email').value}\n\n${document.getElementById('message').value}`;
-    navigator.clipboard.writeText(rawText).then(() => {
-        alert("Message copied to clipboard!");
-    }).catch(err => {
-        alert("Failed to copy text: ", err);
-    });
-}
-
-// 7. 3D Tilt Effect on Cards
-const tiltCards = document.querySelectorAll('.tilt-card');
-
-tiltCards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const rotateX = ((y - centerY) / centerY) * -10; // Max 10 deg rotation
-        const rotateY = ((x - centerX) / centerX) * 10;
-        
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-    });
-
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-    });
-});
-
-// 8. Particle Animation with Canvas
-const canvas = document.getElementById('bg-canvas');
-const ctx = canvas.getContext('2d');
-let particlesArray;
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-class Particle {
-    constructor(x, y, directionX, directionY, size, color) {
-        this.x = x;
-        this.y = y;
-        this.directionX = directionX;
-        this.directionY = directionY;
-        this.size = size;
-        this.color = color;
-    }
-    draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-        ctx.fillStyle = this.color;
-        ctx.fill();
-    }
-    update() {
-        if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
-        if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
-        this.x += this.directionX;
-        this.y += this.directionY;
-        this.draw();
-    }
-}
-
-function initParticles() {
-    particlesArray = [];
-    let numberOfParticles = (canvas.height * canvas.width) / 12000;
-    for (let i = 0; i < numberOfParticles; i++) {
-        let size = (Math.random() * 2) + 1;
-        let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
-        let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
-        let directionX = (Math.random() * 1) - 0.5;
-        let directionY = (Math.random() * 1) - 0.5;
-        // Indigo and Slate/Gray mix
-        let color = Math.random() > 0.5 ? 'rgba(99, 102, 241, 0.4)' : 'rgba(148, 163, 184, 0.2)';
-        
-        particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
-    }
-}
-
-function animateParticles() {
-    requestAnimationFrame(animateParticles);
-    ctx.clearRect(0, 0, innerWidth, innerHeight);
-    for (let i = 0; i < particlesArray.length; i++) {
-        particlesArray[i].update();
-    }
-}
-
+// Handle Window Resize
 window.addEventListener('resize', () => {
-    canvas.width = innerWidth;
-    canvas.height = innerHeight;
-    initParticles();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
 });
 
-initParticles();
-animateParticles();
 
-// 9. Certificate Modal Slider
-let slideIndex = 0;
-const slides = document.querySelectorAll(".slide");
-const modal = document.getElementById("certModal");
+// --- 2. HTML Elements 3D Scroll Logic ---
+const cards3D = document.querySelectorAll('.card-3d');
+let lastScrollY = window.scrollY;
 
-function openModal() {
-    modal.style.display = "flex";
-    showSlides(slideIndex);
-}
-
-function closeModal() {
-    modal.style.display = "none";
-}
-
-function changeSlide(n) {
-    showSlides(slideIndex += n);
-}
-
-function showSlides(n) {
-    if (n >= slides.length) { slideIndex = 0; }
-    if (n < 0) { slideIndex = slides.length - 1; }
+window.addEventListener('scroll', () => {
+    let currentScrollY = window.scrollY;
+    let scrollDelta = currentScrollY - lastScrollY;
     
-    slides.forEach(slide => slide.classList.remove("active"));
-    slides[slideIndex].classList.add("active");
-}
+    // Rotate the 3D background Arduino based on scroll
+    arduinoGroup.rotation.z += scrollDelta * 0.002;
+    arduinoGroup.rotation.x += scrollDelta * 0.001;
+    
+    // Make HTML Elements shift in 3D direction when scrolled
+    cards3D.forEach(card => {
+        // Calculate a tilt angle based on how fast you scroll
+        // Clamped between -15 and 15 degrees to remain readable
+        let tiltX = Math.max(-15, Math.min(15, scrollDelta * 0.5));
+        
+        // Also subtly change the Y tilt based on scroll position on page
+        let tiltY = Math.sin(currentScrollY * 0.002) * 10;
+        
+        card.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+    });
 
-// Close modal when clicking outside image
-window.onclick = function(event) {
-    if (event.target == modal) {
-        closeModal();
-    }
-}
+    // Reset card orientation smoothly when scrolling stops
+    clearTimeout(window.scrollTimeout);
+    window.scrollTimeout = setTimeout(() => {
+        cards3D.forEach(card => {
+            card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+        });
+    }, 150);
+
+    lastScrollY = currentScrollY;
+});
+
+
+// --- 3. Navbar & Smooth Scrolling ---
+const navLinks = document.querySelectorAll('.nav-links a');
+const sections = document.querySelectorAll('section');
+
+// Smooth scroll to sections
+navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+        window.scrollTo({
+            top: targetSection.offsetTop,
+            behavior: 'smooth'
+        });
+    });
+});
+
+// Highlight Active Nav Link on Scroll
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+            current = section.getAttribute('id');
+        }
+    });
+
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').substring(1) === current) {
+            link.classList.add('active');
+        }
+    });
+});
+
+// Mobile Menu Toggle
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.nav-links');
+
+hamburger.addEventListener('click', () => {
+    navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+    navMenu.style.flexDirection = 'column';
+    navMenu.style.position = 'absolute';
+    navMenu.style.top = '60px';
+    navMenu.style.right = '20px';
+    navMenu.style.background = 'rgba(10, 15, 22, 0.9)';
+    navMenu.style.padding = '20px';
+    navMenu.style.borderRadius = '10px';
+});
